@@ -11,7 +11,6 @@
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            /* 根據您的最新指示，修正圖片路徑和檔案格式 */
             background-image: url('images/backgd.png');
             background-size: cover;
             background-position: center;
@@ -22,26 +21,281 @@
             overflow-x: hidden;
         }
         .header-bg {
-            background-color: rgba(209, 184, 150, 0.8); /* Warm brown with transparency */
+            background-color: rgba(209, 184, 150, 0.8);
         }
         .main-bg {
-            background-color: rgba(247, 241, 227, 0.8); /* Creamy yellow with transparency */
+            background-color: rgba(247, 241, 227, 0.8);
         }
         .card-bg {
-            background-color: rgba(230, 223, 198, 0.8); /* Lighter cream with transparency */
+            background-color: rgba(230, 223, 198, 0.8);
         }
         .text-primary {
-            color: #5a4b41; /* Dark brown */
+            color: #5a4b41;
         }
         .text-secondary {
-            color: #8c735d; /* Medium brown */
+            color: #8c735d;
         }
         .btn-primary {
-            background-color: #d4a373; /* Terracotta */
+            background-color: #d4a373;
             color: white;
         }
         .btn-primary:hover {
-            background-color: #c08c5c; /* Darker terracotta */
+            background-color: #c08c5c;
+        }
+        /* 遊戲專用樣式 */
+        .pottery-wheel {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #8B4513 30%, #654321 70%);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            position: relative;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .pottery-wheel.spinning {
+            animation: spin 3s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .clay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #CD853F;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: grab;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.2), inset 5px 5px 10px rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        .drawing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            cursor: crosshair;
+            z-index: 10;
+        }
+        .clay:active {
+            cursor: grabbing;
+        }
+        .tools {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .tool {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #f0f0f0, #d0d0d0);
+            box-shadow: 5px 5px 10px rgba(0,0,0,0.1), -5px -5px 10px rgba(255,255,255,0.7);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .tool:hover {
+            transform: translateY(-2px);
+            box-shadow: 7px 7px 15px rgba(0,0,0,0.2), -7px -7px 15px rgba(255,255,255,0.8);
+        }
+        .tool.active {
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+        }
+        .phase-controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .phase-btn {
+            padding: 15px 30px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .sculpting-phase {
+            background: linear-gradient(145deg, #8B4513, #654321);
+            color: white;
+        }
+        .decorating-phase {
+            background: linear-gradient(145deg, #FF6B6B, #ee5a52);
+            color: white;
+        }
+        .firing-phase {
+            background: linear-gradient(145deg, #FFD700, #ffc107);
+            color: #333;
+        }
+        .phase-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .decoration-panel {
+            display: none;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+        }
+        .decoration-panel.active {
+            display: block;
+        }
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .color {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .color:hover {
+            transform: scale(1.1);
+            border-color: #333;
+        }
+        .color.selected {
+            border-color: #000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .patterns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .pattern {
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .pattern:hover {
+            border-color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        .pattern.selected {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+        }
+        .status {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        .gallery {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .gallery h3 {
+            margin-bottom: 20px;
+            color: #8B4513;
+            font-size: 24px;
+        }
+        .saved-works {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .saved-work {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #CD853F;
+            border: 3px solid #8B4513;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .saved-work:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .firing-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 0%, rgba(255,165,0,0.3) 25%, rgba(255,69,0,0.5) 50%, rgba(255,165,0,0.3) 75%, transparent 100%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: firing 2s ease-in-out;
+        }
+        @keyframes firing {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+        .success-message.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        @media (max-width: 768px) {
+            .pottery-wheel {
+                width: 300px;
+                height: 300px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .tools {
+                gap: 10px;
+            }
+            .tool {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+            .phase-btn {
+                padding: 10px 20px;
+                font-size: 16px;
+                margin: 5px;
+            }
         }
     </style>
 </head>
@@ -52,7 +306,6 @@
         <h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-snug animate-pulse">2025 器成之前</h1>
         <h2 class="text-xl md:text-2xl font-bold text-secondary mt-2">新手助人者培力工作坊</h2>
         <div class="flex items-center justify-center space-x-2 mt-4 text-secondary">
-            <!-- 陶罐 SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M7 10h1v4h-1c-2.76 0-5 2.24-5 5v1h14v-1c0-2.76-2.24-5-5-5h-1V10h1z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12a4 4 0 00-4 4h8a4 4 0 00-4-4z"/></svg>
             <span class="text-lg">手捏陶 x 職涯探索</span>
         </div>
@@ -64,7 +317,7 @@
     <!-- Main Content Section -->
     <main class="w-full max-w-4xl p-4 md:p-6 main-bg rounded-3xl shadow-xl mt-8 relative z-10">
 
-        <!-- About Workshop and Instructors (Now first) -->
+        <!-- About Workshop and Instructors -->
         <section class="mt-4 text-primary space-y-4">
             <div class="flex flex-col md:flex-row md:space-x-8">
                 <div class="md:w-1/2">
@@ -86,7 +339,6 @@
                         </ul>
                     </div>
                     <div class="flex items-center space-x-4 mt-4 text-lg">
-                        <!-- 時鐘 SVG -->
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -118,10 +370,6 @@
                             <h4 class="text-xl font-bold text-primary">🔸 傅詩容 社工師</h4>
                             <p class="mt-2 text-lg">社會工作師(社工字第00674號)<br>學歷：私立輔仁大學社會工作學系學士、國立臺灣大學社會工作學系碩士(菸酒生ing)<br>曾任：臺北市政府毒品危害防制中心毒品個案管理師、新北市蘆洲少年福利服務中心社工師<br>現任：法務部矯正署臺北看守所社工師</p>
                         </div>
-                        <div id="content3" class="hidden">
-                            <h4 class="text-xl font-bold text-primary">給 未來的自己</h4>
-                            <p class="mt-2 text-lg">未來的自己會長成甚麼樣子呢？在將來的某天，你會想送給自己甚麼禮物？</p>
-                        </div>
                         <div id="instructor3" class="hidden">
                             <h4 class="text-xl font-bold text-primary">🔸 王耀萱 陶藝老師</h4>
                             <p class="mt-2 text-lg">學歷：國立臺灣藝術大學 雕塑系 塑造專攻、工藝設計系 雙主修 陶藝專攻<br>經驗：於畫室、補習班、學校社團、各式活動任教，相關教學經驗9年<br>專長：跨媒材藝術教育、美術/雕塑/陶藝/各材質手作之客製化課程設計與教學</p>
@@ -131,7 +379,7 @@
             </div>
         </section>
 
-        <!-- Team Introduction Section (Now second) -->
+        <!-- Team Introduction Section -->
         <section class="mt-10 text-primary space-y-4">
             <h3 class="text-2xl font-bold text-primary mb-2">團隊介紹</h3>
             <div class="card-bg rounded-2xl p-6 shadow-inner">
@@ -171,13 +419,86 @@
                 </div>
                 <div id="content3" class="hidden">
                     <h4 class="text-xl font-bold text-primary">給 未來的自己</h4>
-                    <p class="mt-2 text-lg">未來的自己會長成甚麼樣子呢？在將來的某天，你會想送給自己甚麼禮物？</p>
+                    <p class="mt-2 text-lg">未來的自己會長成甚麼樣子呢？</p>
+                    <p class="mt-2 text-lg">在將來的某天，你/妳最想送給自己甚麼禮物？</p>
                 </div>
                 <div id="content4" class="hidden">
                     <h4 class="text-xl font-bold text-primary">展覽與回顧</h4>
                     <p class="mt-2 text-lg">展出時間與形式將於團體中細緻討論，也歡迎成員邀請身邊重要的人一同參展、共同見證這一路走來的過程。</p>
                     <p class="mt-2 text-lg">然而，當我們再度打開給未來自己的禮物時，當下的自己會想到些甚麼呢？</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- Pottery Game Section -->
+        <section class="mt-10 card-bg rounded-2xl p-6 shadow-xl">
+            <div class="game-container">
+                <div class="status" id="status">歡迎來到陶藝工作室！點擊陶土開始創作吧</div>
+                
+                <div class="pottery-wheel" id="potteryWheel">
+                    <div class="clay" id="clay" style="width: 100px; height: 60px; border-radius: 50%;">
+                        <canvas class="drawing-canvas" id="drawingCanvas"></canvas>
+                    </div>
+                </div>
+                
+                <div class="tools" id="sculptingTools">
+                    <button class="tool" data-action="pull">🔺 拉高</button>
+                    <button class="tool" data-action="press">🔻 按下</button>
+                    <button class="tool" data-action="widen">↔️ 加寬</button>
+                    <button class="tool" data-action="narrow">↕️ 變窄</button>
+                    <button class="tool" data-action="texture">🌊 紋理</button>
+                    <button class="tool" data-action="smooth">✨ 平滑</button>
+                </div>
+                
+                <div class="phase-controls">
+                    <button class="phase-btn sculpting-phase" onclick="setPhase('sculpting')">🎨 捏塑階段</button>
+                    <button class="phase-btn decorating-phase" onclick="setPhase('decorating')">🎨 裝飾階段</button>
+                    <button class="phase-btn firing-phase" onclick="firePottery()">🔥 燒製完成</button>
+                </div>
+                
+                <div class="decoration-panel" id="decorationPanel">
+                    <h3>🎨 選擇畫筆</h3>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <label>筆刷大小: </label>
+                        <input type="range" id="brushSize" min="2" max="20" value="5" style="margin: 0 10px;">
+                        <span id="brushSizeValue">5px</span>
+                        <button class="tool" onclick="clearDrawing()" style="margin-left: 20px;">🗑️ 清除</button>
+                    </div>
+                    
+                    <h3>🎨 選擇顏色</h3>
+                    <div class="color-palette">
+                        <div class="color" style="background: #FF6B6B;" data-color="#FF6B6B"></div>
+                        <div class="color" style="background: #4ECDC4;" data-color="#4ECDC4"></div>
+                        <div class="color" style="background: #45B7D1;" data-color="#45B7D1"></div>
+                        <div class="color" style="background: #96CEB4;" data-color="#96CEB4"></div>
+                        <div class="color" style="background: #FFEAA7;" data-color="#FFEAA7"></div>
+                        <div class="color" style="background: #DDA0DD;" data-color="#DDA0DD"></div>
+                        <div class="color" style="background: #98D8C8;" data-color="#98D8C8"></div>
+                        <div class="color" style="background: #F7DC6F;" data-color="#F7DC6F"></div>
+                        <div class="color" style="background: #FFFFFF;" data-color="#FFFFFF"></div>
+                        <div class="color" style="background: #000000;" data-color="#000000"></div>
+                    </div>
+                    
+                    <h3>🎭 快速圖案</h3>
+                    <div class="patterns">
+                        <div class="pattern" onclick="drawQuickPattern('dots')">⚫ 圓點</div>
+                        <div class="pattern" onclick="drawQuickPattern('stripes')">📏 條紋</div>
+                        <div class="pattern" onclick="drawQuickPattern('flowers')">🌸 花朵</div>
+                        <div class="pattern" onclick="drawQuickPattern('geometric')">🔷 幾何</div>
+                        <div class="pattern" onclick="drawQuickPattern('spiral')">🌀 螺旋</div>
+                    </div>
+                </div>
+                
+                <div class="gallery">
+                    <h3>🏛️ 作品展覽廳</h3>
+                    <div class="saved-works" id="savedWorks">
+                        <!-- 儲存的作品會顯示在這裡 -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                🎉 恭喜！你的陶藝作品燒製完成了！
             </div>
         </section>
 
@@ -235,6 +556,7 @@
     </footer>
 
     <script>
+        // JS for the main website functionality
         function showContent(contentId) {
             const contentDivs = document.getElementById('course-content').children;
             for (let i = 0; i < contentDivs.length; i++) {
@@ -262,6 +584,405 @@
                 musicText.innerText = "播放音樂";
             }
         }
+
+        // JS for the Pottery Game
+        let currentPhase = 'sculpting';
+        let clayData = {
+            width: 100,
+            height: 60,
+            color: '#CD853F',
+            pattern: null,
+            texture: 'smooth',
+            isFired: false
+        };
+        let selectedColor = '#FF6B6B';
+        let selectedPattern = null;
+        let savedWorks = JSON.parse(localStorage.getItem('potteryWorks') || '[]');
+        let isDrawing = false;
+        let canvas, ctx;
+        let brushSize = 5;
+        
+        const clay = document.getElementById('clay');
+        const status = document.getElementById('status');
+        const potteryWheel = document.getElementById('potteryWheel');
+        const decorationPanel = document.getElementById('decorationPanel');
+        const savedWorksContainer = document.getElementById('savedWorks');
+        
+        // 初始化
+        function init() {
+            updateClayDisplay();
+            displaySavedWorks();
+            setupEventListeners();
+            setupCanvas();
+        }
+        
+        // 設置畫布
+        function setupCanvas() {
+            canvas = document.getElementById('drawingCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // 設置畫布大小
+            resizeCanvas();
+            
+            // 設置繪畫事件
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // 觸控事件
+            canvas.addEventListener('touchstart', handleTouch);
+            canvas.addEventListener('touchmove', handleTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+        }
+        
+        // 調整畫布大小
+        function resizeCanvas() {
+            const rect = clay.getBoundingClientRect();
+            canvas.width = clayData.width;
+            canvas.height = clayData.height;
+            canvas.style.width = clayData.width + 'px';
+            canvas.style.height = clayData.height + 'px';
+        }
+        
+        // 設置事件監聽器
+        function setupEventListeners() {
+            // 工具按鈕
+            document.querySelectorAll('.tool').forEach(tool => {
+                tool.addEventListener('click', () => {
+                    if (currentPhase === 'sculpting') {
+                        handleSculpting(tool.dataset.action);
+                    }
+                });
+            });
+            
+            // 顏色選擇
+            document.querySelectorAll('.color').forEach(color => {
+                color.addEventListener('click', (event) => {
+                    selectColor(color.dataset.color, event);
+                });
+            });
+            
+            // 筆刷大小
+            const brushSizeSlider = document.getElementById('brushSize');
+            const brushSizeValue = document.getElementById('brushSizeValue');
+            brushSizeSlider.addEventListener('input', (e) => {
+                brushSize = e.target.value;
+                brushSizeValue.textContent = brushSize + 'px';
+            });
+        }
+        
+        // 處理捏塑動作
+        function handleSculpting(action) {
+            if (clayData.isFired) {
+                status.textContent = '作品已經燒製完成，無法再修改！';
+                return;
+            }
+            
+            potteryWheel.classList.add('spinning');
+            setTimeout(() => potteryWheel.classList.remove('spinning'), 1000);
+            
+            switch(action) {
+                case 'pull':
+                    clayData.height = Math.min(clayData.height + 20, 200);
+                    status.textContent = '陶土被拉高了！';
+                    break;
+                case 'press':
+                    clayData.height = Math.max(clayData.height - 15, 20);
+                    status.textContent = '陶土被按下了！';
+                    break;
+                case 'widen':
+                    clayData.width = Math.min(clayData.width + 20, 250);
+                    status.textContent = '陶土變寬了！';
+                    break;
+                case 'narrow':
+                    clayData.width = Math.max(clayData.width - 15, 40);
+                    status.textContent = '陶土變窄了！';
+                    break;
+                case 'texture':
+                    clayData.texture = 'textured';
+                    status.textContent = '增加了美麗的紋理！';
+                    break;
+                case 'smooth':
+                    clayData.texture = 'smooth';
+                    status.textContent = '陶土變得平滑！';
+                    break;
+            }
+            
+            updateClayDisplay();
+            resizeCanvas();
+        }
+        
+        // 選擇顏色
+        function selectColor(color, event) {
+            selectedColor = color;
+            document.querySelectorAll('.color').forEach(c => c.classList.remove('selected'));
+            event.target.classList.add('selected');
+            status.textContent = '已選擇顏色，在陶土上拖曳來繪畫！';
+        }
+        
+        // 開始繪畫
+        function startDrawing(e) {
+            if (currentPhase !== 'decorating' || clayData.isFired) return;
+            
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.strokeStyle = selectedColor;
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+        
+        // 繪畫
+        function draw(e) {
+            if (!isDrawing || currentPhase !== 'decorating' || clayData.isFired) return;
+            
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx.lineTo(x, y);
+            ctx.stroke();
+        }
+        
+        // 停止繪畫
+        function stopDrawing() {
+            isDrawing = false;
+            ctx.beginPath();
+        }
+        
+        // 處理觸控事件
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 'mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+        
+        // 清除繪畫
+        function clearDrawing() {
+            if (clayData.isFired) {
+                status.textContent = '作品已經燒製完成，無法再修改！';
+                return;
+            }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            status.textContent = '繪畫已清除！';
+        }
+        
+        // 繪製快速圖案
+        function drawQuickPattern(patternType) {
+            if (currentPhase !== 'decorating' || clayData.isFired) return;
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(canvas.width, canvas.height) / 3;
+            
+            ctx.strokeStyle = selectedColor;
+            ctx.lineWidth = brushSize;
+            ctx.lineCap = 'round';
+            
+            switch(patternType) {
+                case 'dots':
+                    for (let i = 0; i < 12; i++) {
+                        const angle = (i * Math.PI * 2) / 12;
+                        const x = centerX + Math.cos(angle) * radius;
+                        const y = centerY + Math.sin(angle) * radius;
+                        ctx.beginPath();
+                        ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    break;
+                    
+                case 'stripes':
+                    for (let i = 0; i < canvas.height; i += brushSize * 3) {
+                        ctx.beginPath();
+                        ctx.moveTo(0, i);
+                        ctx.lineTo(canvas.width, i);
+                        ctx.stroke();
+                    }
+                    break;
+                    
+                case 'flowers':
+                    for (let i = 0; i < 6; i++) {
+                        const angle = (i * Math.PI * 2) / 6;
+                        const x = centerX + Math.cos(angle) * radius * 0.7;
+                        const y = centerY + Math.sin(angle) * radius * 0.7;
+                        
+                        // 畫花瓣
+                        for (let j = 0; j < 5; j++) {
+                            const petalAngle = (j * Math.PI * 2) / 5;
+                            const petalX = x + Math.cos(petalAngle) * brushSize * 2;
+                            const petalY = y + Math.sin(petalAngle) * brushSize * 2;
+                            ctx.beginPath();
+                            ctx.arc(petalX, petalY, brushSize / 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                    break;
+                    
+                case 'geometric':
+                    // 畫三角形
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY - radius);
+                    ctx.lineTo(centerX - radius, centerY + radius);
+                    ctx.lineTo(centerX + radius, centerY + radius);
+                    ctx.closePath();
+                    ctx.stroke();
+                    break;
+                    
+                case 'spiral':
+                    ctx.beginPath();
+                    for (let angle = 0; angle < Math.PI * 6; angle += 0.1) {
+                        const spiralRadius = angle * 3;
+                        const x = centerX + Math.cos(angle) * spiralRadius;
+                        const y = centerY + Math.sin(angle) * spiralRadius;
+                        if (angle === 0) {
+                            ctx.moveTo(x, y);
+                        } else {
+                            ctx.lineTo(x, y);
+                        }
+                    }
+                    ctx.stroke();
+                    break;
+            }
+            
+            status.textContent = `已繪製${patternType}圖案！`;
+        }
+        
+        // 設置遊戲階段
+        function setPhase(phase) {
+            currentPhase = phase;
+            
+            if (phase === 'sculpting') {
+                decorationPanel.classList.remove('active');
+                status.textContent = '現在是捏塑階段，使用工具改變陶土形狀！';
+            } else if (phase === 'decorating') {
+                decorationPanel.classList.add('active');
+                status.textContent = '現在是裝飾階段，選擇顏色和圖案來裝飾你的作品！';
+            }
+        }
+        
+        // 燒製陶器
+        function firePottery() {
+            if (clayData.isFired) {
+                status.textContent = '這個作品已經燒製過了！';
+                return;
+            }
+            
+            const firingEffect = document.createElement('div');
+            firingEffect.className = 'firing-effect';
+            clay.appendChild(firingEffect);
+            
+            status.textContent = '正在燒製中...請等待';
+            
+            setTimeout(() => {
+                clayData.isFired = true;
+                clay.style.boxShadow = `
+                    inset -5px -5px 10px rgba(0,0,0,0.3),
+                    inset 5px 5px 10px rgba(255,255,255,0.2),
+                    0 0 20px rgba(255,165,0,0.5)
+                `;
+                
+                saveWork();
+                
+                showSuccessMessage();
+                
+                status.textContent = '🎉 燒製完成！你的作品已經儲存到展覽廳了！';
+                
+                firingEffect.remove();
+            }, 2000);
+        }
+        
+        // 儲存作品
+        function saveWork() {
+            const work = {
+                ...clayData,
+                id: Date.now(),
+                createdAt: new Date().toLocaleString(),
+                drawing: canvas.toDataURL()
+            };
+            
+            savedWorks.unshift(work);
+            if (savedWorks.length > 12) {
+                savedWorks = savedWorks.slice(0, 12);
+            }
+            
+            localStorage.setItem('potteryWorks', JSON.stringify(savedWorks));
+            displaySavedWorks();
+        }
+        
+        // 顯示儲存的作品
+        function displaySavedWorks() {
+            savedWorksContainer.innerHTML = '';
+            
+            savedWorks.forEach(work => {
+                const workElement = document.createElement('div');
+                workElement.className = 'saved-work';
+                workElement.style.background = work.color;
+                workElement.style.width = Math.min(work.width * 0.8, 80) + 'px';
+                workElement.style.height = Math.min(work.height * 0.8, 80) + 'px';
+                workElement.title = `創作於: ${work.createdAt}`;
+                
+                if (work.drawing) {
+                    workElement.style.backgroundImage = `url(${work.drawing})`;
+                    workElement.style.backgroundSize = 'cover';
+                    workElement.style.backgroundPosition = 'center';
+                }
+                
+                if (work.texture === 'textured' && !work.drawing) {
+                    workElement.style.background += ` radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 2px, transparent 2px),
+                        radial-gradient(circle at 70% 70%, rgba(0,0,0,0.1) 1px, transparent 1px)`;
+                }
+                
+                savedWorksContainer.appendChild(workElement);
+            });
+        }
+        
+        // 更新陶土顯示
+        function updateClayDisplay() {
+            clay.style.width = clayData.width + 'px';
+            clay.style.height = clayData.height + 'px';
+            clay.style.background = clayData.color;
+            
+            if (clayData.texture === 'textured') {
+                clay.style.background += ` radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3) 3px, transparent 3px),
+                    radial-gradient(circle at 70% 70%, rgba(0,0,0,0.2) 2px, transparent 2px)`;
+                clay.style.backgroundSize = '20px 20px, 15px 15px';
+            }
+            
+            if (clayData.height > 100) {
+                clay.style.borderRadius = '50% 50% 50% 50% / 30% 30% 70% 70%';
+            } else if (clayData.height < 40) {
+                clay.style.borderRadius = '50% 50% 50% 50% / 70% 70% 30% 30%';
+            } else {
+                clay.style.borderRadius = '50%';
+            }
+            
+            if (canvas) {
+                resizeCanvas();
+            }
+        }
+        
+        // 顯示成功訊息
+        function showSuccessMessage() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 初始化遊戲
+        init();
     </script>
 </body>
 </html>
