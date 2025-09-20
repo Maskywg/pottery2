@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>器成之前 新手助人者培力工作坊</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            /* 根據您的最新指示，修正圖片路徑和檔案格式 */
+            background-image: url('images/backgd.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            z-index: 1;
+            overflow-x: hidden;
+        }
+        .header-bg {
+            background-color: rgba(209, 184, 150, 0.8); /* Warm brown with transparency */
+        }
+        .main-bg {
+            background-color: rgba(247, 241, 227, 0.8); /* Creamy yellow with transparency */
+        }
+        .card-bg {
+            background-color: rgba(230, 223, 198, 0.8); /* Lighter cream with transparency */
+        }
+        .text-primary {
+            color: #5a4b41; /* Dark brown */
+        }
+        .text-secondary {
+            color: #8c735d; /* Medium brown */
+        }
+        .btn-primary {
+            background-color: #d4a373; /* Terracotta */
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #c08c5c; /* Darker terracotta */
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center min-h-screen p-4">
+
+    <!-- Header Section -->
+    <header class="header-bg rounded-3xl shadow-xl w-full max-w-4xl p-6 md:p-10 text-center relative z-10 -mt-8">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tight leading-snug animate-pulse">2025 器成之前</h1>
+        <h2 class="text-xl md:text-2xl font-bold text-secondary mt-2">新手助人者培力工作坊</h2>
+        <div class="flex items-center justify-center space-x-2 mt-4 text-secondary">
+            <!-- 陶罐 SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><path d="M7 10h1v4h-1c-2.76 0-5 2.24-5 5v1h14v-1c0-2.76-2.24-5-5-5h-1V10h1z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12a4 4 0 00-4 4h8a4 4 0 00-4-4z"/></svg>
+            <span class="text-lg">手捏陶 x 職涯探索</span>
+        </div>
+        <button id="music-toggle-btn" class="mt-4 btn-primary font-bold py-2 px-6 rounded-full shadow-lg transition-colors duration-300 transform hover:scale-105" onclick="toggleMusic()">
+            <span id="music-text">播放音樂</span>
+        </button>
+    </header>
+
+    <!-- Main Content Section -->
+    <main class="w-full max-w-4xl p-4 md:p-6 main-bg rounded-3xl shadow-xl mt-8 relative z-10">
+
+        <!-- About Workshop and Instructors (Now first) -->
+        <section class="mt-4 text-primary space-y-4">
+            <div class="flex flex-col md:flex-row md:space-x-8">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold text-primary mb-2">關於工作坊</h3>
+                    <div class="card-bg rounded-2xl p-6 shadow-inner mt-4">
+                        <h4 class="text-xl font-bold text-primary mb-2">器成之前──新手助人者培力工作坊</h4>
+                        <p class="mt-2 text-lg">「器成之前，會砌成甚麼樣子呢？」</p>
+                        <p class="mt-2 text-lg">我們想要邀請您為自己停下腳步，保持對自己生命的好奇，在助人的道路上，發掘自己真實的樣貌，成為獨一無二的形狀，好好的承接自己，並在不久的將來以舒服自在的姿態成為助人者。</p>
+                        <p class="mt-2 text-lg">成為助人者，也是成為一個人的開始，這一切的起點是甚麼呢？是從小到大的累積；是踏入助人專業的那一刻，亦或是取得專業認證的那一天？然而，甚麼是助人者該有的樣子？</p>
+                        <p class="mt-2 text-lg">身而為人，面對著生命中的各種酸甜苦辣，也面對著生命中好多的不確定與困惑。同時，身為助人者的我們，也成為容器、承接住每個相遇的生命。邀請您，一同同在、共創，一同面對生命中的各種不確定，並在其中找到未來生活中的些許可能。</p>
+
+                        <h4 class="text-xl font-bold text-primary mt-6 mb-2">⚜ 在團體中您將經驗到 ⚜</h4>
+                        <ul class="list-disc list-inside space-y-2 text-lg">
+                            <li>🔸 跨域專業團隊：心理師、社工師與陶藝老師攜手合作，帶來全方位的陪伴。</li>
+                            <li>🔸 強調主體性：每一次捏陶都是一場內在的自我對話，作品承載參與者獨特的生命故事與思考。</li>
+                            <li>🔸 療癒與表達並行：創作不只是作品，更是心靈與理念的延伸，開啟助人者專屬的創造力培養。</li>
+                            <li>🔸 展覽與回顧：特設展覽環節，讓歷程得以被看見與重整。</li>
+                            <li>🔸 群體支持力量：在共創與交流中感受彼此支持與啟發。</li>
+                        </ul>
+                    </div>
+                    <div class="flex items-center space-x-4 mt-4 text-lg">
+                        <!-- 時鐘 SVG -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="font-bold">時間：</span>
+                        <span>11/09(日), 11/16(日), 11/23(日)<br>10:00-17:30，午休1.5小時</span>
+                    </div>
+                    <p class="text-lg mt-2">3日+1日展覽與回顧 (時間待定)</p>
+                </div>
+
+                <div class="mt-8 md:mt-0 md:w-1/2">
+                    <h3 class="text-2xl font-bold text-primary mb-2">帶領講師</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="showInstructor('instructor1')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                            王慈襄
+                        </button>
+                        <button onclick="showInstructor('instructor2')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                            傅詩容
+                        </button>
+                        <button onclick="showInstructor('instructor3')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                            王耀萱
+                        </button>
+                    </div>
+                    <div id="instructor-content" class="mt-4 card-bg rounded-2xl p-6 shadow-inner">
+                        <div id="instructor1" class="hidden">
+                            <h4 class="text-xl font-bold text-primary">🔸 王慈襄 諮商心理師</h4>
+                            <p class="mt-2 text-lg">諮商心理師（諮心字第005518號）<br>學歷：國立臺灣藝術大學美術學系學士 複合媒材組、中國文化大學心理與輔導學系研究所碩士<br>曾任：畫室老師、臺北榮總兒青日間病房個管輔導老師、法務部矯正署臺北看守所諮商心理師<br>現任：躺椅上的貓心理諮商所、陽晴心理治療所、安興精神科診所 兼任諮商心理師</p>
+                        </div>
+                        <div id="instructor2" class="hidden">
+                            <h4 class="text-xl font-bold text-primary">🔸 傅詩容 社工師</h4>
+                            <p class="mt-2 text-lg">社會工作師(社工字第00674號)<br>學歷：私立輔仁大學社會工作學系學士、國立臺灣大學社會工作學系碩士(菸酒生ing)<br>曾任：臺北市政府毒品危害防制中心毒品個案管理師、新北市蘆洲少年福利服務中心社工師<br>現任：法務部矯正署臺北看守所社工師</p>
+                        </div>
+                        <div id="content3" class="hidden">
+                            <h4 class="text-xl font-bold text-primary">給 未來的自己</h4>
+                            <p class="mt-2 text-lg">未來的自己會長成甚麼樣子呢？在將來的某天，你會想送給自己甚麼禮物？</p>
+                        </div>
+                        <div id="instructor3" class="hidden">
+                            <h4 class="text-xl font-bold text-primary">🔸 王耀萱 陶藝老師</h4>
+                            <p class="mt-2 text-lg">學歷：國立臺灣藝術大學 雕塑系 塑造專攻、工藝設計系 雙主修 陶藝專攻<br>經驗：於畫室、補習班、學校社團、各式活動任教，相關教學經驗9年<br>專長：跨媒材藝術教育、美術/雕塑/陶藝/各材質手作之客製化課程設計與教學</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Introduction Section (Now second) -->
+        <section class="mt-10 text-primary space-y-4">
+            <h3 class="text-2xl font-bold text-primary mb-2">團隊介紹</h3>
+            <div class="card-bg rounded-2xl p-6 shadow-inner">
+                <h4 class="text-xl font-bold text-primary mb-2">🔸 棲陶人：心理、社工與藝術的相知相惜</h4>
+                <p class="mt-2 text-lg">在矯正機關相遇的一群工作者，在與收容人相識、連結的過程裡，看見屬於愛、屬於家、屬於每個個體無法取代的生命歷程，看見藝術媒材的包容與創造力，我們珍視當下來自於每個個體創造力的集合，允許各種可能發生，也期待著發生不同可能。</p>
+                <p class="mt-2 text-lg">我們期待將這樣的經驗推展到矯正機關以外，到世界的不同角落與人們連結；我們喜歡在團體中看見的每道亮光，更期待能帶著這些光去到不同的地方，繼續懷抱著七逃人的精神到不同的場域裡落地。</p>
+            </div>
+        </section>
+        
+        <!-- Course Outline Section -->
+        <section class="mt-10">
+            <h3 class="text-2xl font-bold text-primary mb-4">課程大綱</h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="showContent('content1')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                    11/09(日)
+                </button>
+                <button onclick="showContent('content2')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                    11/16(日)
+                </button>
+                <button onclick="showContent('content3')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                    11/23(日)
+                </button>
+                <button onclick="showContent('content4')" class="py-2 px-4 rounded-full text-white font-bold transition-all duration-300 transform hover:scale-105" style="background-color: #d4a373;">
+                    展覽與回顧
+                </button>
+            </div>
+            
+            <div id="course-content" class="mt-6 card-bg rounded-2xl p-6 shadow-inner">
+                <div id="content1" class="hidden">
+                    <h4 class="text-xl font-bold text-primary">房間：自我對話空間</h4>
+                    <p class="mt-2 text-lg">如果與自己對話的宇宙裡，你會想說些甚麼呢？</p>
+                    <p class="mt-2 text-lg">在那裏，陪伴著自己的又是甚麼呢？</p>
+                </div>
+                <div id="content2" class="hidden">
+                    <h4 class="text-xl font-bold text-primary">幻想精靈：關於我存在的力量</h4>
+                    <p class="mt-2 text-lg">也許是一種相信、一種好奇、一種無以名狀的動力，一直以來在我身邊的會是甚麼呢？</p>
+                </div>
+                <div id="content3" class="hidden">
+                    <h4 class="text-xl font-bold text-primary">給 未來的自己</h4>
+                    <p class="mt-2 text-lg">未來的自己會長成甚麼樣子呢？在將來的某天，你會想送給自己甚麼禮物？</p>
+                </div>
+                <div id="content4" class="hidden">
+                    <h4 class="text-xl font-bold text-primary">展覽與回顧</h4>
+                    <p class="mt-2 text-lg">展出時間與形式將於團體中細緻討論，也歡迎成員邀請身邊重要的人一同參展、共同見證這一路走來的過程。</p>
+                    <p class="mt-2 text-lg">然而，當我們再度打開給未來自己的禮物時，當下的自己會想到些甚麼呢？</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing and Registration -->
+        <section class="mt-10 card-bg rounded-2xl p-6 shadow-inner">
+            <h3 class="text-2xl font-bold text-primary mb-4">費用與報名</h3>
+            <div class="text-lg space-y-2">
+                <p>
+                    <span class="font-bold">報名資格：</span>
+                    <span>已完成新手心理諮商與輔導諮詢專業人員、社工及其他相關輔助人工作者。</span>
+                </p>
+                <p>
+                    <span class="font-bold">費用：</span>
+                    <span class="line-through text-secondary">原價 8,800 元</span>
+                    <span class="text-red-600 font-bold ml-2">優惠價 7,500 元</span>
+                </p>
+                <p>
+                    <span class="text-sm text-secondary mt-1">優惠適用於學生或兩人以上團報；作品焚燒費用另計</span>
+                </p>
+                <p>
+                    <span class="font-bold">地點：</span>
+                    <span>貓椅椅上的貓心理諮商所</span>
+                </p>
+            </div>
+            <div class="mt-6 flex justify-center">
+                <a href="https://forms.gle/AeS6yYwRJBuuUzDc6" target="_blank" class="btn-primary font-bold py-3 px-8 rounded-full shadow-lg transition-colors duration-300 transform hover:scale-105">
+                    立即報名
+                </a>
+            </div>
+        </section>
+
+        <!-- QR Code and Social Media -->
+        <section class="mt-10 text-center">
+            <h3 class="text-2xl font-bold text-primary mb-4">課程詳情與聯絡方式</h3>
+            <div class="flex flex-col md:flex-row justify-center items-center md:space-x-8 space-y-8 md:space-y-0">
+                <div class="flex flex-col items-center">
+                    <img src="images/qrcode.png" alt="課程詳情 QR Code" class="w-48 h-48 rounded-lg shadow-md mb-2">
+                    <span class="text-sm text-secondary">課程詳情</span>
+                </div>
+                <div class="text-lg">
+                    <p class="text-secondary">追蹤我們的IG：</p>
+                    <a href="https://www.instagram.com/catsonthecouch172/" target="_blank" class="text-secondary hover:underline font-bold text-xl mt-1 block">@catsonthecouch172</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <audio id="background-audio" loop>
+        <source src="audio/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <footer class="mt-8 text-center text-secondary text-sm p-4">
+        <p>&copy; 2025 器成之前 工作坊</p>
+    </footer>
+
+    <script>
+        function showContent(contentId) {
+            const contentDivs = document.getElementById('course-content').children;
+            for (let i = 0; i < contentDivs.length; i++) {
+                contentDivs[i].classList.add('hidden');
+            }
+            document.getElementById(contentId).classList.remove('hidden');
+        }
+
+        function showInstructor(instructorId) {
+            const instructorDivs = document.getElementById('instructor-content').children;
+            for (let i = 0; i < instructorDivs.length; i++) {
+                instructorDivs[i].classList.add('hidden');
+            }
+            document.getElementById(instructorId).classList.remove('hidden');
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('background-audio');
+            const musicText = document.getElementById('music-text');
+            if (audio.paused) {
+                audio.play();
+                musicText.innerText = "暫停音樂";
+            } else {
+                audio.pause();
+                musicText.innerText = "播放音樂";
+            }
+        }
+    </script>
+</body>
+</html>
